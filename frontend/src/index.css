@@ -14,7 +14,7 @@ body {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 48px;
   padding: 48px;
 }
@@ -24,11 +24,20 @@ body {
 }
 
 table {
-  width:auto;
+  width:100%;
 }
 
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
   padding: 5px;
+}
+
+.filter p, input {
+  margin: 0px;
+  padding: 5px;
+}
+
+.filter {
+  margin: 10px;
 }

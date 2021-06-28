@@ -1,15 +1,10 @@
 let initialState = {
   cars: [],
-  filters: {
-    make: "",
-    model: "",
-    year: "",
-    color: ""
-  }
+  filter: new Map()
 };
 
 export const cars = (state = initialState, action) => {
-  console.log('action', state, action)
+  // console.log('action', state, action)
   switch (action.type) {
     
     case 'SET_CARS':
@@ -18,8 +13,19 @@ export const cars = (state = initialState, action) => {
         cars: action.payload
       };
 
-    case 'SET_CAR_FILTER':
-      return state
+    case 'SET_CARS_FILTER':
+      if (action.payload.value === "") {
+        let newFilter = state.filter;
+        newFilter.delete(action.payload.filter);
+        return {
+          ...state,
+          filter: newFilter
+        }
+      }
+      return {
+        ...state,
+        filter: state.filter.set(action.payload.filter, action.payload.value)
+      }
     
     default:
       return state;

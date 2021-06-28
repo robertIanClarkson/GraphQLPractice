@@ -1,20 +1,22 @@
 import React from 'react';
-
+import shortid from 'shortid';
 import { connect } from 'react-redux';
-
-import { setCarFilter, setPersonFilter, setCars, setPersons } from '../store/actions';
-
+import { setCarsFilter, setPersonsFilter, setCars, setPersons } from '../store/actions';
 import { CarComponent } from './Cars';
 import { PersonComponent } from './Persons';
 
-import shortid from 'shortid';
-
-// App.js
 export const App = (props) => {
-  console.log(props)
   
   const fetchCars = (_) => {
     let query = "{ cars { make model year color }}";
+    if (props.carsState.filter.size > 0) {
+      let temp = "";
+      for (const [key, value] of props.carsState.filter) {
+        if (value !== "") temp = temp.concat(key,":\"",value,"\", ");
+      }
+      query = "{ cars(" + temp +  ") { make model year color }}";
+    }
+    console.log(query)
     fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
@@ -29,6 +31,14 @@ export const App = (props) => {
 
   const fetchPersons = (_) => {
     let query = "{ persons { first last gender dob state }}";
+    if (props.personsState.filter.size > 0) {
+      let temp = "";
+      for (const [key, value] of props.personsState.filter) {
+        if (value !== "") temp = temp.concat(key,":\"",value,"\", ");
+      }
+      query = "{ persons(" + temp +  ") { first last gender dob state }}";
+    }
+    
     fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
@@ -43,11 +53,30 @@ export const App = (props) => {
   
   return (
     <div>
-      <button onClick={fetchCars}>Get Cars</button>
-      <button onClick={fetchPersons}>Get Persons</button>
       <div className="row">
         <div className="col">
           <h1>Persons</h1>
+          <button onClick={fetchPersons}>Load Persons</button>
+          <div className="filter" >
+            <p>first</p>
+            <input type='text' onChange={(e) => props.setPersonsFilter('first', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>last</p>
+            <input type='text' onChange={(e) => props.setPersonsFilter('last', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>gender</p>
+            <input type='text' onChange={(e) => props.setPersonsFilter('gender', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>dob</p>
+            <input type='text' onChange={(e) => props.setPersonsFilter('dob', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>state</p>
+            <input type='text' onChange={(e) => props.setPersonsFilter('state', e.target.value)}/>
+          </div>
           <table>
             <thead>
               <tr>
@@ -69,6 +98,23 @@ export const App = (props) => {
         </div>
         <div className="col">
           <h1>Cars</h1>
+          <button onClick={fetchCars}>Load Cars</button>
+          <div className="filter">
+            <p>make</p>
+            <input type='text' onChange={(e) => props.setCarsFilter('make', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>model</p>
+            <input type='text' onChange={(e) => props.setCarsFilter('model', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>year</p>
+            <input type='text' onChange={(e) => props.setCarsFilter('year', e.target.value)}/>
+          </div>
+          <div className="filter" >
+            <p>color</p>
+            <input type='text' onChange={(e) => props.setCarsFilter('color', e.target.value)}/>
+          </div>
           <table>
             <thead>
               <tr>
@@ -101,8 +147,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setCars,
   setPersons,
-  setCarFilter,
-  setPersonFilter,
+  setCarsFilter,
+  setPersonsFilter,
 };
 
 const AppContainer = connect(

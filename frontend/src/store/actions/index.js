@@ -1,19 +1,19 @@
-export const setCarFilter = state => ({
-  type: 'SET_CAR_FILTER',
-  payload: state
+export const setCarsFilter = (filter, value) => ({
+  type: 'SET_CARS_FILTER',
+  payload: {filter, value}
 });
 
-export const setPersonFilter = state => ({
-  type: 'SET_PERSON_FILTER',
-  payload: state
+export const setPersonsFilter = (filter, value) => ({
+  type: 'SET_PERSONS_FILTER',
+  payload: {filter, value}
 });
 
-export const setCars = state => ({
+export const setCars = cars => ({
   type: 'SET_CARS',
-  payload: state
+  payload: cars
 })
 
-export const setPersons = state => ({
+export const setPersons = persons => ({
   type: 'SET_PERSONS',
-  payload: state
+  payload: persons
 })
