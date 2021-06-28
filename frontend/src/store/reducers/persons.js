@@ -27,7 +27,7 @@ export const persons = (state=initialState, action) => {
         filter: state.filter.set(action.payload.filter, action.payload.value)
       }
     
-      default:
+    default:
       return state;
   }
 };

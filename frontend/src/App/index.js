@@ -16,7 +16,6 @@ export const App = (props) => {
       }
       query = "{ cars(" + temp +  ") { make model year color }}";
     }
-    console.log(query)
     fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
@@ -38,7 +37,6 @@ export const App = (props) => {
       }
       query = "{ persons(" + temp +  ") { first last gender dob state }}";
     }
-    
     fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
