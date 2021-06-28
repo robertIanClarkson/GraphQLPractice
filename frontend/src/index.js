@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppContainer from './App/App';
+import AppContainer from './App';
 import './index.css';
 
 // Add these imports - Step 1

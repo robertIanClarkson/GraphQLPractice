@@ -1,8 +1,10 @@
 import { combineReducers, createStore } from 'redux';
-import { geod } from './reducers/index';
+import { cars } from './reducers/cars';
+import { persons } from './reducers/persons';
 
 export const reducers = combineReducers({
-  geod,
+  cars,
+  persons
 });
 
 // store.js
