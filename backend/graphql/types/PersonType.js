@@ -5,11 +5,6 @@ const {
   GraphQLString
 } = require('graphql');
 
-// const { CarType } = require('./CarType');
-
-// const CAR_DATA = require('../../data/CAR_DATA.json');
-// const JOIN_DATA = require('../../data/JOIN_DATA.json');
-
 const PersonType = new GraphQLObjectType({
   name: "Person",
   description: "A single person",
@@ -19,14 +14,7 @@ const PersonType = new GraphQLObjectType({
     last: { type: GraphQLNonNull(GraphQLString) },
     gender: { type: GraphQLNonNull(GraphQLString) },
     dob: { type: GraphQLNonNull(GraphQLString) },
-    state: { type: GraphQLNonNull(GraphQLString) },
-    // car: {
-    //   type: CarType,
-    //   resolve: (person) => {
-    //     let car_id = JOIN_DATA.find(row => row.person_id === person.id).car_id;
-    //     return CAR_DATA.find(car => car.id === car_id);
-    //   }
-    // }
+    state: { type: GraphQLNonNull(GraphQLString) }
   })
 });
 

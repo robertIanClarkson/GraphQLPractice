@@ -8,7 +8,6 @@ const { CarType } = require('./../types/CarType');
 
 const CAR_DATA = require('./../../data/CAR_DATA.json');
 
-
 const car = {
   type: CarType,
   description: "A single car.",

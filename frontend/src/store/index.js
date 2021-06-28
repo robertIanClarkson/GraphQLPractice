@@ -7,7 +7,6 @@ export const reducers = combineReducers({
   persons
 });
 
-// store.js
 export function configureStore() {
   const store = createStore(
     reducers, 
